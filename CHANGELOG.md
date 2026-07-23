@@ -1,3 +1,13 @@
+## 3.6.0
+- Drive the auto-animation with a throttled ticker: the engine now only pumps frames
+  at the composition frame rate (or the configured `frameRate`) instead of every vsync,
+  cutting CPU usage roughly in half for a typical 30fps animation on a 60Hz display
+  (more on high-refresh displays). External `AnimationController`s are unaffected.
+- The throttle is inactive under `flutter test` so that `tester.pumpAndSettle()` keeps
+  observing the animation as before.
+- Add `FrameRate.resolveFps` to resolve `FrameRate.composition`/`FrameRate.max` against
+  a composition's own frame rate.
+
 ## 3.5.1
 - Fix cropped fits (e.g. `BoxFit.cover`) ignoring `alignment` and always cropping from the top-left
 - Fix the raster render cache serving the wrong crop when two animations shared a composition and size but differed in fit/alignment
